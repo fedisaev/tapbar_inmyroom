@@ -8,9 +8,8 @@
   background: url("./assets/image-main.png") no-repeat;
   min-width: 380px;
   min-height: 677px;
-}
-@media (max-width: 767px) {
-  .app {
+
+  @media (max-width: 767px) {
     background-size: cover;
   }
 }
@@ -37,13 +36,14 @@
   transition: all 0.8s ease 0s;
   position: fixed;
   bottom: 0;
-}
-.list li {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  cursor: pointer;
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+  }
 }
 
 .list.hidden {
@@ -56,4 +56,4 @@
   min-width: 380px;
 }
 
-/*# sourceMappingURL=App.css.map */
+
