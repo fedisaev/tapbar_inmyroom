@@ -6,8 +6,8 @@
 
 .app {
   background: url("./assets/image-main.png") no-repeat;
-  min-width: 380px;
-  min-height: 677px;
+  min-width: 100vw;
+  min-height: 100vh;
   background-size: cover;
 }
 
@@ -21,35 +21,10 @@
   color: #FFFFFF;
 }
 
-.list {
-  background: #FFFFFF;
-  min-width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  min-height: 59px;
-  list-style: none;
-  transform: translateY(0);
-  transition: all 0.8s ease 0s;
-  position: fixed;
-  bottom: 0;
-}
-.list li {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  cursor: pointer;
-}
-
-.list.hidden {
-  transform: translateY(100%);
-}
-
 .scrollDiv {
   height: 10000px;
   background: lightgray;
-  min-width: 380px;
+  min-width: 100vw;
 }
 
 /*# sourceMappingURL=App.css.map */
