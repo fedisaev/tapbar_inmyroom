@@ -34,6 +34,7 @@
   position: fixed;
   bottom: 0;
 
+
   li {
     display: flex;
     align-items: center;
@@ -49,7 +50,7 @@
 
 .scrollDiv {
   height: 10000px;
-  background: lightcoral;
+  background: lightgray;
   min-width: 380px;
 }
 

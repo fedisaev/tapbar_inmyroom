@@ -1,5 +1,5 @@
 import './App.scss';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import shareIcon from './assets/share-icon.svg';
 import scrollUpIcon from './assets/scroll-up-icon.svg';
 import commentsIcon from './assets/comments-icon.svg';
@@ -7,17 +7,36 @@ import heartIcon from './assets/heart-icon.svg';
 
 function App() {
 
-    const [tapBar, setTapBar] = useState(true);
-    const [comments, setComments] = useState(0);
-    const [liked, setLiked] = useState(0);
+    const [comments, setComments] = useState<number>(0);
+    const [liked, setLiked] = useState<number>(0);
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY >= 200) {
-            setTapBar(false);
-        } else {
-            setTapBar(true);
-        }
-    });
+    const [isVisible, setIsVisible] = useState<boolean>(true);
+    const [prevScrollPos, setPrevScrollPos] = useState<number>(0);
+    const [scrollTimeout, setScrollTimeout] = useState<number>(1000);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentPos = window.scrollY;
+            if (currentPos >= 200 && currentPos > prevScrollPos) {
+                setIsVisible(false);
+            } else {
+                setIsVisible(true);
+            }
+            setPrevScrollPos(currentPos);
+            setScrollTimeout(
+                setTimeout(() => {
+                    setIsVisible(true);
+                }, 1000)
+            );
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            clearTimeout(scrollTimeout);
+        };
+    }, [prevScrollPos, scrollTimeout]);
 
     const sharePage = () => {
         if (navigator.share) {
@@ -50,7 +69,7 @@ function App() {
                 <p className='text'>Одноэтажный дом с двумя спальнями в стиле эклектика</p>
             </div>
             <div className='scrollDiv'></div>
-            <ul className={tapBar ? 'list' : 'list hidden'}>
+            <ul className={isVisible ? 'list' : 'list hidden'}>
                 <li onClick={sharePage}><img src={shareIcon} alt="share-icon"/></li>
                 <li onClick={scrollToTop}><img src={scrollUpIcon} alt="scroll-up-icon"/></li>
                 <li onClick={addComments}><img src={commentsIcon} alt="comments-icon"/><span>{comments}</span></li>
